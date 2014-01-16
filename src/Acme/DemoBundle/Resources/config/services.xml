@@ -14,5 +14,21 @@
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
             <argument type="service" id="twig.extension.acme.demo" />
         </service>
+
+        <service id="acme.demo.request_listener" class="Acme\DemoBundle\EventListener\RequestListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="wsse.security.authentication.provider"
+                 class="Acme\DemoBundle\Security\Authentication\Provider\WsseProvider" public="false">
+            <argument /> <!-- User Provider -->
+            <argument>%kernel.cache_dir%/security/nonces</argument>
+        </service>
+
+        <service id="wsse.security.authentication.listener"
+                 class="Acme\DemoBundle\Security\Firewall\WsseListener" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.authentication.manager" />
+        </service>
     </services>
 </container>
