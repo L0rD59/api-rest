@@ -12,7 +12,8 @@ class WsseFactory implements SecurityBundle\DependencyInjection\Security\Factory
         $providerId = 'security.authentication.provider.wsse.' . $id;
         $container
             ->setDefinition($providerId, new DependencyInjection\DefinitionDecorator('wsse.security.authentication.provider'))
-            ->replaceArgument(0, new DependencyInjection\Reference($userProvider));
+            ->replaceArgument(0, new DependencyInjection\Reference($userProvider))
+            ->replaceArgument(2, $config['lifetime']);
 
         $listenerId = 'security.authentication.listener.wsse.' . $id;
         $listener = $container->setDefinition(
@@ -35,5 +36,9 @@ class WsseFactory implements SecurityBundle\DependencyInjection\Security\Factory
 
     public function addConfiguration(Config\Definition\Builder\NodeDefinition $node)
     {
+        $node
+            ->children()
+            ->scalarNode('lifetime')->defaultValue(300)
+            ->end();
     }
 }

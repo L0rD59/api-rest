@@ -10,6 +10,6 @@ class RequestListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
-        //$event->getRequest()->setFormat('yml', 'text/yaml');
+        $event->getRequest()->setFormat('yml', 'text/yaml');
     }
 }

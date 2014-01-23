@@ -72,7 +72,10 @@ fos_rest:
         default_format: json
     view:
         formats:
-            xml: true
+            xml: false
             json: true
-            rss: true
+            rss: false
             yml: true
+    allowed_methods_listener: true
+    access_denied_listener:
+        json: true

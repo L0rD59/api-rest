@@ -3,6 +3,6 @@ _welcome:
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
 
 _demo:
-    resource: "@AcmeDemoBundle/Controller/DemoController.php"
-    type:     rest
+    type: rest
+    resource: Acme\DemoBundle\Controller\DemoController
     prefix:   /demo

@@ -8,11 +8,13 @@ class WsseProvider implements Security\Core\Authentication\Provider\Authenticati
 {
     private $userProvider;
     private $cacheDir;
+    private $lifetime;
 
-    public function __construct(Security\Core\User\UserProviderInterface $userProvider, $cacheDir)
+    public function __construct(Security\Core\User\UserProviderInterface $userProvider, $cacheDir, $lifetime)
     {
         $this->userProvider = $userProvider;
         $this->cacheDir = $cacheDir;
+        $this->lifetime = $lifetime;
     }
 
     public function authenticate(Security\Core\Authentication\Token\TokenInterface $token)
@@ -32,14 +34,14 @@ class WsseProvider implements Security\Core\Authentication\Provider\Authenticati
     protected function validateDigest($digest, $nonce, $created, $secret)
     {
         // Expire le timestamp après 5 minutes
-        if (time() - strtotime($created) > 300) {
+        if (time() - strtotime($created) > $this->lifetime) {
             return false;
         }
 
         // Valide que le nonce est unique dans les 5 minutes
         if (file_exists($this->cacheDir . '/' . $nonce) && file_get_contents(
                 $this->cacheDir . '/' . $nonce
-            ) + 300 > time()
+            ) + $this->lifetime > time()
         ) {
             throw new Security\Core\Exception\NonceExpiredException('Previously used nonce detected');
         }

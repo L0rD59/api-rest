@@ -16,10 +16,12 @@ security:
     firewalls:
         wsse_secured:
             pattern:   /demo/.*
-            stateless: true
-            wsse:      true
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+            #stateless: true
+            wsse:
+                lifetime: 1000
+        #dev:
+        #    pattern:  ^/(_(profiler|wdt)|css|images|js)/
+        #    security: false
 
     access_control:
+        - { path: ^/demo, roles: ROLE_USER }
