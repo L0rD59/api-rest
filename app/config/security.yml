@@ -18,7 +18,7 @@ security:
             pattern:   /demo/.*
             #stateless: true
             wsse:
-                lifetime: 1000
+                lifetime: 10000
         #dev:
         #    pattern:  ^/(_(profiler|wdt)|css|images|js)/
         #    security: false

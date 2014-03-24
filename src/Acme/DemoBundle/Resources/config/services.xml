@@ -22,7 +22,7 @@
         <service id="wsse.security.authentication.provider"
                  class="Acme\DemoBundle\Security\Authentication\Provider\WsseProvider" public="false">
             <argument /> <!-- User Provider -->
-            <argument>%kernel.cache_dir%/security/nonces</argument>
+            <argument>%kernel.root_dir%/Resources/security/nonces</argument>
             <argument /> <!-- Lifetime -->
         </service>
 
