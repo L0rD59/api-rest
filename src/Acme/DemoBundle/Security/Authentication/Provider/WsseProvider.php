@@ -33,7 +33,7 @@ class WsseProvider implements Security\Core\Authentication\Provider\Authenticati
 
     protected function validateDigest($digest, $nonce, $created, $secret)
     {
-        // Expire le timestamp après 5 minutes
+        // Expire le timestamp après lifetime
         if (time() - strtotime($created) > $this->lifetime) {
             return false;
         }
@@ -41,10 +41,11 @@ class WsseProvider implements Security\Core\Authentication\Provider\Authenticati
         // Valide que le nonce est unique dans les 5 minutes
         if (file_exists($this->cacheDir . '/' . $nonce) && file_get_contents(
                 $this->cacheDir . '/' . $nonce
-            ) + $this->lifetime > time()
+            ) + $this->lifetime < time()
         ) {
             throw new Security\Core\Exception\NonceExpiredException('Previously used nonce detected');
         }
+
         file_put_contents($this->cacheDir . '/' . $nonce, time());
 
         // Valide le Secret

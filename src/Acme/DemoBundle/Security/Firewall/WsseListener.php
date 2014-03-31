@@ -1,6 +1,7 @@
 <?php
 namespace Acme\DemoBundle\Security\Firewall;
 
+use Symfony\Component\HttpFoundation;
 use Symfony\Component\Security;
 use Symfony\Component\HttpKernel;
 use Acme\DemoBundle as AcmeDemoBundle;
@@ -48,7 +49,7 @@ class WsseListener implements Security\Http\Firewall\ListenerInterface
             // return;
 
             // Deny authentication with a '403 Forbidden' HTTP response
-            $response = new Response();
+            $response = new HttpFoundation\Response();
             $response->setStatusCode(403);
             $event->setResponse($response);
 

@@ -5,4 +5,4 @@ _welcome:
 _demo:
     type: rest
     resource: Acme\DemoBundle\Controller\DemoController
-    prefix:   /demo
+    prefix:   /api

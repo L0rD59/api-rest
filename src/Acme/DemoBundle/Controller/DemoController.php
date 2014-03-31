@@ -4,14 +4,16 @@ namespace Acme\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle;
 use FOS\RestBundle as FOSRestBundle;
-use FOS\RestBundle\Controller\Annotations\View;
 
 
 class DemoController extends FOSRestBundle\Controller\FOSRestController implements FOSRestBundle\Routing\ClassResourceInterface
 {
     /**
+     * @FOSRestBundle\Controller\Annotations\QueryParam(name="email", requirements="\d+", description="Email of users")
+     * @FOSRestBundle\Controller\Annotations\QueryParam(name="sort", requirements="\d+", description="Sort of users")
+     * @FOSRestBundle\Controller\Annotations\QueryParam(name="limit", requirements="\d+", description="Limit of users")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @View()
+     * @FOSRestBundle\Controller\Annotations\View()
      */
     public function getUsersAction()
     {

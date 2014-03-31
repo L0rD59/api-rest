@@ -15,7 +15,7 @@ security:
 
     firewalls:
         wsse_secured:
-            pattern:   /demo/.*
+            pattern:   /api/.*
             #stateless: true
             wsse:
                 lifetime: 10000
@@ -24,4 +24,4 @@ security:
         #    security: false
 
     access_control:
-        - { path: ^/demo, roles: ROLE_USER }
+        - { path: ^/api, roles: ROLE_USER }

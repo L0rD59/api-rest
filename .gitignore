@@ -14,3 +14,9 @@
 
 ### Vagrant ###
 .vagrant/
+
+### Nonces security ###
+/app/Resources/security/*
+!/app/Resources/security/.gitkeep
+/app/Resources/security/nonces/*
+!/app/Resources/security/nonces/.gitkeep
